@@ -12,9 +12,11 @@ transitions = np.array([[0, 0, 1, 0], [1, 0, 0, 0], [0, 0.9, 0, 0.1], [0, 0, 1, 
 pmc.set_t(transitions)
 
 # Example 1 (Table 1)
+print(":: Table 1: Hitting Probs, index is t-1, each col is a different starting state")
 p = pmc.hitting([0, 0, 0, 1], verbose=True)
 
 # Example 2 (Figure 2, left)
+print(":: Plotting Figure 2 (top) as hitting1.png (x index is t-1)")
 upper = {}
 lower = {}
 alpha_max = 0.05
@@ -46,14 +48,17 @@ leg.append(mpatches.Patch(color='0.6', label='$\epsilon = 0.02$'))
 leg.append(mpatches.Patch(color='0.8', label='$\epsilon = 0.03$'))
 plt.legend(handles=leg)
 plt.savefig("hitting1.png", dpi=250, bbox_inches="tight",pad_inches=0.02)
-#tikz_save('hitting1.tex')
+tikz_save('hitting1.tex')
+
+
 ##############################################################
 
 
 # Example 2 (Figure 2, right)
-n = 60 #100
+print(":: Plotting Figure 2 (bot) as hitting2.png (x index is t-1)")
+
+n = 100
 pmc = Chain("Messages", n, ["start", "delivery", "try", "lost"])
-transitions = np.array([[0, 0, 1, 0], [1, 0, 0, 0], [0, 0.9, 0, 0.1], [0, 0, 1, 0]])
 pmc.set_t(transitions)
 p = pmc.hitting([0, 0, 0, 1], verbose=False)
 upper = {}
@@ -89,10 +94,10 @@ leg.append(mpatches.Patch(color='0.8', label='$\epsilon = 0.03$'))
 plt.legend(handles=leg)
 plt.axhline(y=1, color='k', linestyle='dashed')
 plt.savefig("hitting2.png", dpi=250, bbox_inches="tight",pad_inches=0.02)
-#tikz_save('hitting2.tex')
+tikz_save('hitting2.tex')
 
 # Application (Section 6)
-
+print(":: Plotting Figure 4 as cumul.png")
 gamma = [0.0175, 0.0354, 0.0281]
 nu = [0.00031, 0.00187, 0.00149]
 delta = [0.0012, 0.0013, 0.0018]
@@ -160,9 +165,8 @@ itr = np.array([[[1-max(gamma)-max(nu), min(nu), min(gamma)], [1-min(gamma)-min(
 geriatric_imc.set_t(itr)
 
 
+print(":: Computing Data in Table 3")
 cumul = {}
-
-
 for dep in range(3):
     tr = np.array([[1-gamma[dep]-nu[dep], nu[dep], gamma[dep]], [0, 1-delta[dep], delta[dep]], [0, 0, 1]])
     geriatric_mc.set_t(tr)
