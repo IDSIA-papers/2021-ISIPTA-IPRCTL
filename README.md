@@ -3,4 +3,4 @@ Code used for the simulations of the paper "Robust Model Checking with Imprecise
 
 The functions in `iprctl.py` provide tools to compute inferences in imprecise Markov chains and imprecise Markov Reward Models
 
-These functions are used by experiments.py to reproduce the experimental results and the demonstrative examples presented in the paper
+These functions are used by `experiments.py` to reproduce the experimental results and the demonstrative examples presented in the paper
